@@ -210,7 +210,9 @@ function median(values: number[]): number {
  * has fewer live comps than `mult_shrink`, then clamped to [mult_floor, mult_cap]. Each ratio is
  * first winsorized at `ratio_cap`: a live token with almost no TVL can carry a market cap hundreds
  * of times its TVL, and one such comp must not set its whole category's multiple. Categories with
- * no live protocol at all take the global median. Nothing here is a hand-picked number.
+ * no live protocol at all take the global median. The shrink weight is `mult_shrink` (10): a
+ * category with ten live comps is weighted half its own median, half the global median.
+ * Nothing here is a hand-picked number.
  */
 export function categoryMultiples(snapshot: Snapshot, model: ModelConstants = MODEL): Record<string, number> {
   const byCategory = new Map<string, number[]>();
