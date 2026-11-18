@@ -161,6 +161,9 @@
       return hay.indexOf(q) >= 0;
     });
   }
+  // Sort the filtered rows by the active key; a tie falls back to slug order so the
+  // board is stable no matter which column the reader sorts by. Null growth sorts
+  // lowest and a null age sorts last, so missing figures never float to the top.
   function sortedRows(list) {
     var key = state.sort;
     return list.slice().sort(function (a, b) {
